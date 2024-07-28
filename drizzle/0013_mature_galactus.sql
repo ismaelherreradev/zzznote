@@ -1,0 +1,1 @@
+ALTER TABLE `zzznote_magic_links` DROP COLUMN `id`;
