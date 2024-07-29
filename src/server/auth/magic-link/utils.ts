@@ -1,6 +1,6 @@
 import { eq } from "drizzle-orm";
 import { generateIdFromEntropySize } from "lucia";
-import { createDate, TimeSpan } from "oslo";
+import { TimeSpan, createDate } from "oslo";
 import { db } from "~/server/db";
 import { magicLinks } from "~/server/db/schema";
 
@@ -20,14 +20,14 @@ export async function generateMagicLinkToken(userId: string) {
   return result;
 }
 
-export async function getMagicLinkTokenByUserId(userId: string) {
-  const token = await db.query.magicLinks.findFirst({
-    where: (magicLinks, { eq }) => eq(magicLinks.userId, userId),
+export async function getMagicToken(token: string) {
+  const existingToken = await db.query.magicLinks.findFirst({
+    where: eq(magicLinks.token, token),
   });
 
-  return token;
+  return existingToken;
 }
 
-export async function deleteMagicToken(userId: string) {
-  await db.delete(magicLinks).where(eq(magicLinks.userId, userId));
+export async function deleteMagicToken(token: string) {
+  await db.delete(magicLinks).where(eq(magicLinks.token, token));
 }

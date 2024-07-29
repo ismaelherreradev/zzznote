@@ -6,9 +6,9 @@ CREATE TABLE `zzznote_accounts` (
 );
 --> statement-breakpoint
 CREATE TABLE `zzznote_magic_links` (
-	`id` text PRIMARY KEY NOT NULL,
+	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
 	`user_id` text NOT NULL,
-	`token` text,
+	`token` text NOT NULL,
 	`token_expires_at` integer NOT NULL,
 	FOREIGN KEY (`user_id`) REFERENCES `zzznote_user`(`id`) ON UPDATE no action ON DELETE no action
 );
@@ -36,14 +36,4 @@ CREATE TABLE `zzznote_user` (
 	`email` text
 );
 --> statement-breakpoint
-DROP TABLE `app_accounts`;--> statement-breakpoint
-DROP TABLE `app_magic_links`;--> statement-breakpoint
-DROP TABLE `app_profile`;--> statement-breakpoint
-DROP TABLE `app_reset_tokens`;--> statement-breakpoint
-DROP TABLE `app_session`;--> statement-breakpoint
-DROP TABLE `app_user`;--> statement-breakpoint
-DROP TABLE `app_verify_email_tokens`;--> statement-breakpoint
-CREATE UNIQUE INDEX `zzznote_accounts_user_id_unique` ON `zzznote_accounts` (`user_id`);--> statement-breakpoint
-CREATE UNIQUE INDEX `zzznote_magic_links_user_id_unique` ON `zzznote_magic_links` (`user_id`);--> statement-breakpoint
-CREATE UNIQUE INDEX `zzznote_profile_user_id_unique` ON `zzznote_profile` (`user_id`);--> statement-breakpoint
 CREATE UNIQUE INDEX `zzznote_user_email_unique` ON `zzznote_user` (`email`);

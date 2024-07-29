@@ -1,1 +1,0 @@
-DROP TABLE `zzznote_profile`;

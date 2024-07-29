@@ -1,7 +1,7 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "05dcf357-1be1-4eb9-9c5e-58392ec5d4a3",
+  "id": "25879887-4053-49de-9672-da8e5b9cd01d",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "zzznote_accounts": {
@@ -29,15 +29,7 @@
           "autoincrement": false
         }
       },
-      "indexes": {
-        "zzznote_accounts_user_id_unique": {
-          "name": "zzznote_accounts_user_id_unique",
-          "columns": [
-            "user_id"
-          ],
-          "isUnique": true
-        }
-      },
+      "indexes": {},
       "foreignKeys": {
         "zzznote_accounts_user_id_zzznote_user_id_fk": {
           "name": "zzznote_accounts_user_id_zzznote_user_id_fk",
@@ -61,10 +53,10 @@
       "columns": {
         "id": {
           "name": "id",
-          "type": "text",
+          "type": "integer",
           "primaryKey": true,
           "notNull": true,
-          "autoincrement": false
+          "autoincrement": true
         },
         "user_id": {
           "name": "user_id",
@@ -77,7 +69,7 @@
           "name": "token",
           "type": "text",
           "primaryKey": false,
-          "notNull": false,
+          "notNull": true,
           "autoincrement": false
         },
         "token_expires_at": {
@@ -162,22 +154,7 @@
           "autoincrement": false
         }
       },
-      "indexes": {
-        "zzznote_profile_user_id_unique": {
-          "name": "zzznote_profile_user_id_unique",
-          "columns": [
-            "user_id"
-          ],
-          "isUnique": true
-        },
-        "name_idx": {
-          "name": "name_idx",
-          "columns": [
-            "display_name"
-          ],
-          "isUnique": false
-        }
-      },
+      "indexes": {},
       "foreignKeys": {
         "zzznote_profile_user_id_zzznote_user_id_fk": {
           "name": "zzznote_profile_user_id_zzznote_user_id_fk",
@@ -221,15 +198,7 @@
           "autoincrement": false
         }
       },
-      "indexes": {
-        "session_user_idx": {
-          "name": "session_user_idx",
-          "columns": [
-            "user_id"
-          ],
-          "isUnique": false
-        }
-      },
+      "indexes": {},
       "foreignKeys": {
         "zzznote_session_user_id_zzznote_user_id_fk": {
           "name": "zzznote_session_user_id_zzznote_user_id_fk",

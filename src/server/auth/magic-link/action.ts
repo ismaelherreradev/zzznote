@@ -2,32 +2,33 @@
 import { generateIdFromEntropySize } from "lucia";
 import { db } from "~/server/db";
 import { users } from "~/server/db/schema";
-import { ZSignInSchema, type TSignInSchema } from "./schema";
+import { ZSignInSchema } from "./schema";
 import { generateMagicLinkToken } from "./utils";
 
-export async function loginWithMagicLink(data: TSignInSchema) {
-  const { email } = ZSignInSchema.parse(data)
+export async function loginWithMagicLink(formData: FormData) {
+  const data = Object.fromEntries(formData.entries());
+
+  const { email } = ZSignInSchema.parse(data);
 
   const existedUser = await db.query.users.findFirst({
     where: (users, { eq }) => eq(users.email, email),
   });
 
-  if(existedUser) {
-    const result = await generateMagicLinkToken(existedUser.id)
+  if (existedUser) {
+    const result = await generateMagicLinkToken(existedUser.id);
 
     // send email
-    console.log(result)
+    console.log(result);
   } else {
-    const userId = generateIdFromEntropySize(10)
+    const userId = generateIdFromEntropySize(10);
 
     await db.insert(users).values({
       id: userId,
-      email
-    })
+      email,
+    });
 
-     const result = await generateMagicLinkToken(userId)
-      // send email
-     console.log(result)
-
+    const result = await generateMagicLinkToken(userId);
+    // send email
+    console.log(result);
   }
 }
