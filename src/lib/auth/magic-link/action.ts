@@ -1,9 +1,8 @@
 "use server";
-import { generateIdFromEntropySize } from "lucia";
+import { generateMagicLinkToken } from "~/lib/auth/utils";
+import { createMagicLinkAccount } from "~/lib/auth/utils";
 import { db } from "~/server/db";
-import { users } from "~/server/db/schema";
 import { ZSignInSchema } from "./schema";
-import { generateMagicLinkToken } from "./utils";
 
 export async function loginWithMagicLink(formData: FormData) {
   const data = Object.fromEntries(formData.entries());
@@ -20,14 +19,9 @@ export async function loginWithMagicLink(formData: FormData) {
     // send email
     console.log(result);
   } else {
-    const userId = generateIdFromEntropySize(10);
+    const user = await createMagicLinkAccount(email);
 
-    await db.insert(users).values({
-      id: userId,
-      email,
-    });
-
-    const result = await generateMagicLinkToken(userId);
+    const result = await generateMagicLinkToken(user?.id as string);
     // send email
     console.log(result);
   }

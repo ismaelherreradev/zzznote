@@ -1,19 +1,12 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "f579c212-55e6-44d0-8521-64b7d973b471",
-  "prevId": "00000000-0000-0000-0000-000000000000",
+  "id": "106b9cde-1dcf-44a8-a82f-fa4adfe4650d",
+  "prevId": "f579c212-55e6-44d0-8521-64b7d973b471",
   "tables": {
     "zzznote_account": {
       "name": "zzznote_account",
       "columns": {
-        "id": {
-          "name": "id",
-          "type": "integer",
-          "primaryKey": true,
-          "notNull": true,
-          "autoincrement": true
-        },
         "user_id": {
           "name": "user_id",
           "type": "integer",
@@ -36,6 +29,13 @@
             "user_id"
           ],
           "isUnique": true
+        },
+        "account_user_id_idx": {
+          "name": "account_user_id_idx",
+          "columns": [
+            "user_id"
+          ],
+          "isUnique": false
         }
       },
       "foreignKeys": {
@@ -209,7 +209,7 @@
         },
         "user_id": {
           "name": "user_id",
-          "type": "text",
+          "type": "integer",
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false
@@ -222,22 +222,16 @@
           "autoincrement": false
         }
       },
-      "indexes": {},
-      "foreignKeys": {
-        "zzznote_session_user_id_zzznote_user_id_fk": {
-          "name": "zzznote_session_user_id_zzznote_user_id_fk",
-          "tableFrom": "zzznote_session",
-          "tableTo": "zzznote_user",
-          "columnsFrom": [
+      "indexes": {
+        "session_user_idx": {
+          "name": "session_user_idx",
+          "columns": [
             "user_id"
           ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "no action",
-          "onUpdate": "no action"
+          "isUnique": false
         }
       },
+      "foreignKeys": {},
       "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },

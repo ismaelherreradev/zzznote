@@ -1,4 +1,4 @@
-import { loginWithMagicLink } from "~/server/auth/magic-link/action";
+import { loginWithMagicLink } from "~/lib/auth/magic-link/action";
 
 export default async function loginPage() {
   return (

@@ -5,8 +5,50 @@
     {
       "idx": 0,
       "version": "6",
-      "when": 1722212252019,
-      "tag": "0000_busy_luke_cage",
+      "when": 1722284546930,
+      "tag": "0000_spotty_victor_mancha",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1722289428678,
+      "tag": "0001_curvy_zombie",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1722291712911,
+      "tag": "0002_square_mauler",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "6",
+      "when": 1722291843188,
+      "tag": "0003_harsh_khan",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "6",
+      "when": 1722293915926,
+      "tag": "0004_free_odin",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "6",
+      "when": 1722298465607,
+      "tag": "0005_dazzling_blackheart",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "6",
+      "when": 1722298862027,
+      "tag": "0006_unknown_dark_beast",
       "breakpoints": true
     }
   ]

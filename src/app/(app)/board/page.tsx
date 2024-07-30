@@ -1,4 +1,4 @@
-import { getCurrentUser } from "~/server/auth/session";
+import { getCurrentUser } from "~/lib/auth/session";
 
 export default async function boardPage() {
   const user = await getCurrentUser();

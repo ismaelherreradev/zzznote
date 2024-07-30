@@ -1,5 +1,7 @@
 // import { LatestPost } from "~/app/_components/post";
 // import { api, HydrateClient } from "~/trpc/server";
+
+// 16-characters long
 export default async function Home() {
   // const hello = await api.post.hello({ text: "from tRPC" });
 

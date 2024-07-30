@@ -2,7 +2,7 @@ import "server-only";
 
 import { cookies } from "next/headers";
 import { cache } from "react";
-import { lucia } from "~/server/auth";
+import { lucia } from "~/lib/auth";
 import { validateRequest } from "./validate-request";
 
 export const getCurrentUser = cache(async () => {
