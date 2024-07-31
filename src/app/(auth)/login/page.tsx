@@ -1,10 +1,11 @@
-import { loginWithMagicLink } from "~/lib/auth/magic-link/action";
+import LoginForm from "../_components/login-form";
 
 export default async function loginPage() {
   return (
-    <form action={loginWithMagicLink}>
-      <input type="email" name="email" />
-      <button type="submit">Update</button>
-    </form>
+    <>
+      <div>
+        <LoginForm />
+      </div>
+    </>
   );
 }

@@ -50,6 +50,20 @@
       "when": 1722298862027,
       "tag": "0006_unknown_dark_beast",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "6",
+      "when": 1722390903351,
+      "tag": "0007_worthless_namora",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "6",
+      "when": 1722390959740,
+      "tag": "0008_bright_purifiers",
+      "breakpoints": true
     }
   ]
 }
