@@ -1,17 +1,18 @@
+"use client";
+
 import {
   Card,
   CardContent,
   CardDescription,
   CardFooter,
   CardHeader,
-  CardTitle,
 } from "~/components/ui/card";
 
 import { SparklesIcon } from "lucide-react";
-
 import { Button } from "~/components/ui/button";
-import { Input } from "~/components/ui/input";
 import { Separator } from "~/components/ui/separator";
+
+import { MagicForm } from "./form";
 
 export default function LoginForm() {
   return (
@@ -42,12 +43,7 @@ export default function LoginForm() {
       </CardHeader>
       <Separator className="mx-auto my-6 flex w-3/4 bg-black/20" />
       <CardContent>
-        <form className="space-y-4">
-          <Input placeholder="Email" className="rounded-xl" />
-          <Button variant="notik" size="full">
-            Continue
-          </Button>
-        </form>
+        <MagicForm />
       </CardContent>
       <CardFooter>
         <p className="flex gap-1 text-sm">

@@ -10,30 +10,17 @@ export async function GET(request: NextRequest) {
   const token = url.searchParams.get("token");
 
   if (!token) {
-    return Response.json({
-      error: {
-        message: "Token is not existed",
-        data: {
-          code: "BAD_REQUEST",
-          httpStatus: 400,
-        },
-      },
-    });
+    return createErrorResponse("Token is not provided", "BAD_REQUEST", 400);
   }
 
   const existedToken = await getMagicToken(token);
 
   if (!existedToken || !isWithinExpirationDate(existedToken.tokenExpiresAt)) {
-    await deleteMagicToken(token);
-    return Response.json({
-      error: {
-        message: "Invalid token",
-        data: {
-          code: "BAD_REQUEST",
-          httpStatus: 400,
-        },
-      },
-    });
+    if (existedToken) {
+      await deleteMagicToken(token);
+    }
+
+    return createErrorResponse("Invalid or expired token", "BAD_REQUEST", 400);
   }
 
   await deleteMagicToken(token);
@@ -45,4 +32,28 @@ export async function GET(request: NextRequest) {
       Location: "/board",
     },
   });
+}
+
+function createErrorResponse(
+  message: string,
+  code: string,
+  httpStatus: number,
+) {
+  return Response.json(
+    {
+      error: {
+        message,
+        data: {
+          code,
+          httpStatus,
+        },
+      },
+    },
+    {
+      status: httpStatus,
+      headers: {
+        "Content-Type": "application/json",
+      },
+    },
+  );
 }

@@ -1,28 +1,48 @@
 "use server";
-import { generateMagicLinkToken } from "~/lib/auth/utils";
-import { createMagicLinkAccount } from "~/lib/auth/utils";
+import {
+  createMagicLinkAccount,
+  generateAndInsertMagicLinkToken,
+} from "~/lib/auth/utils";
 import { db } from "~/server/db";
-import { ZSignInSchema } from "./schema";
+import { type TSignInSchema, ZSignInSchema } from "./schema";
 
-export async function loginWithMagicLink(formData: FormData) {
-  const data = Object.fromEntries(formData.entries());
+import { sendMagicLink } from "~/lib/email";
 
-  const { email } = ZSignInSchema.parse(data);
+export interface ActionResponse<T> {
+  fieldError?: Partial<Record<keyof T, string | undefined>>;
+  formError?: string;
+}
 
-  const existedUser = await db.query.users.findFirst({
-    where: (users, { eq }) => eq(users.email, email),
+export async function loginWithMagicLink(
+  previousState: null | ActionResponse<TSignInSchema>,
+  formData: FormData,
+): Promise<ActionResponse<TSignInSchema>> {
+  const { success, error, data } = ZSignInSchema.safeParse(
+    Object.fromEntries(formData.entries()),
+  );
+
+  if (!success) {
+    return {
+      fieldError: { email: error.flatten().fieldErrors.email?.[0] },
+    };
+  }
+
+  let user = await db.query.users.findFirst({
+    where: (users, { eq }) => eq(users.email, data.email),
   });
 
-  if (existedUser) {
-    const result = await generateMagicLinkToken(existedUser.id);
-
-    // send email
-    console.log(result);
-  } else {
-    const user = await createMagicLinkAccount(email);
-
-    const result = await generateMagicLinkToken(user?.id as string);
-    // send email
-    console.log(result);
+  if (!user) {
+    user = await createMagicLinkAccount(data.email);
   }
+
+  await sendMagicLinkEmail(user?.id as string, user?.email as string);
+
+  return {};
+}
+
+async function sendMagicLinkEmail(userId: string, email: string) {
+  const result = await generateAndInsertMagicLinkToken(userId);
+  if (!result || !result.token) return;
+
+  await sendMagicLink(result.token, email);
 }

@@ -3,6 +3,7 @@ import { relations } from "drizzle-orm";
 import {
   int,
   integer,
+  primaryKey,
   sqliteTableCreator,
   text,
 } from "drizzle-orm/sqlite-core";
@@ -21,24 +22,34 @@ export const users = createTable("user", {
 });
 
 export const usersRelations = relations(users, ({ one }) => ({
-  profile: one(profiles),
+  profile: one(profiles, {
+    fields: [users.id],
+    references: [profiles.userId],
+  }),
 }));
 
 export type SelectUser = typeof users.$inferSelect;
 export type UserInser = typeof users.$inferInsert;
 
-export const accounts = createTable("account", {
-  id: integer("id", { mode: "number" }).primaryKey({ autoIncrement: true }),
-  userId: text("user_id")
-    .references(() => users.id)
-    .notNull(),
-  accountType: text("account_type", { enum: accountTypeEnum }).notNull(),
-  githubId: text("github_id").unique(),
-  googleId: text("google_id").unique(),
-});
+export const oauth_account = createTable(
+  "oauth_account",
+  {
+    userId: text("user_id")
+      .references(() => users.id)
+      .notNull(),
+    type: text("account_type", { enum: accountTypeEnum }).notNull(),
+    providerId: text("provider_id").notNull(),
+    providerUserId: text("provider_user_id").notNull(),
+  },
+  (oauth_account) => ({
+    compoundKey: primaryKey({
+      columns: [oauth_account.providerId, oauth_account.providerUserId],
+    }),
+  }),
+);
 
-export type SelecAccount = typeof accounts.$inferSelect;
-export type InsertAccont = typeof accounts.$inferInsert;
+export type SelecAccount = typeof oauth_account.$inferSelect;
+export type InsertAccont = typeof oauth_account.$inferInsert;
 
 export const magicLinks = createTable("magic_link", {
   id: integer("id", { mode: "number" }).primaryKey({ autoIncrement: true }),

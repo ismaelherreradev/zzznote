@@ -20,11 +20,19 @@ export async function uncachedValidateRequest(): Promise<validateRequestResult> 
   try {
     if (result.session?.fresh) {
       const sessionCookie = lucia.createSessionCookie(result.session.id);
-      cookies().set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
+      cookies().set(
+        sessionCookie.name,
+        sessionCookie.value,
+        sessionCookie.attributes,
+      );
     }
     if (!result.session) {
       const sessionCookie = lucia.createBlankSessionCookie();
-      cookies().set(sessionCookie.name, sessionCookie.value, sessionCookie.attributes);
+      cookies().set(
+        sessionCookie.name,
+        sessionCookie.value,
+        sessionCookie.attributes,
+      );
     }
   } catch {}
 

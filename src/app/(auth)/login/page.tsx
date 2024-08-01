@@ -1,10 +1,10 @@
-import LoginForm from "../_components/login-form";
+import LoginContainer from "../_components/login-container";
 
 export default async function loginPage() {
   return (
     <>
       <div>
-        <LoginForm />
+        <LoginContainer />
       </div>
     </>
   );
