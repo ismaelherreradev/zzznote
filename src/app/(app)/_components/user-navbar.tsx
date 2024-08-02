@@ -9,7 +9,17 @@ import { logout } from "~/lib/auth/session";
 export default function UserNavbar() {
   return (
     <nav className="container flex justify-between py-4">
-      <Image src={logo} alt="Picture of the author" />
+      <Image
+        style={{
+          width: "auto",
+          height: "auto",
+        }}
+        src={logo}
+        alt="Notik"
+        priority
+        height={80}
+        width={80}
+      />
       <Button variant="notik" onClick={async () => await logout()}>
         Logout
       </Button>

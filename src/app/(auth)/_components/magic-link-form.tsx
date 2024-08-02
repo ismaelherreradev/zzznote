@@ -54,7 +54,7 @@ export default function MagicLinkForm({ execute, isPending }: MagicLinkFormProps
               </FormItem>
             )}
           />
-          <Button disabled={!isValid} variant="notik" size="full" type="submit">
+          <Button variant="notik" size="full" type="submit">
             {isPending ? <Loader2 className="animate-spin" /> : "Continue"}
           </Button>
         </form>

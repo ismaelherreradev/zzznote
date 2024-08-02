@@ -1,12 +1,4 @@
-import {
-  Body,
-  Container,
-  Head,
-  Heading,
-  Html,
-  Link,
-  Preview,
-} from "@react-email/components";
+import { Body, Container, Head, Heading, Html, Link, Preview } from "@react-email/components";
 import * as React from "react";
 
 interface MagicLinkEmailProps {
@@ -24,7 +16,7 @@ export function MagicLinkEmail({ loginCode }: MagicLinkEmailProps) {
         <Container style={container}>
           <Heading style={h1}>Login</Heading>
           <Link
-            href={`${env.NEXT_PUBLIC_APP_URL}/login/magic-link?token=${loginCode}`}
+            href={`${env.NEXT_PUBLIC_APP_URL}/signin/magic-link?token=${loginCode}`}
             target="_blank"
             style={{
               ...link,

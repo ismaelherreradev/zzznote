@@ -1,6 +1,9 @@
+import "server-only";
+
 import { eq } from "drizzle-orm";
 import { generateIdFromEntropySize } from "lucia";
 import { TimeSpan, createDate } from "oslo";
+import { sendMagicLink } from "~/lib/email";
 import { db } from "~/server/db";
 import { magicLinks, users } from "~/server/db/schema";
 
@@ -41,4 +44,11 @@ export async function createMagicLinkUser(email: string) {
     .returning();
 
   return user;
+}
+
+export async function sendMagicLinkEmail(userId: string, email: string) {
+  const result = await generateAndInsertMagicLinkToken(userId);
+  if (!result || !result.token) return;
+
+  await sendMagicLink(result.token, email);
 }

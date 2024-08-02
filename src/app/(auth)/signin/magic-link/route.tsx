@@ -34,11 +34,7 @@ export async function GET(request: NextRequest) {
   });
 }
 
-function createErrorResponse(
-  message: string,
-  code: string,
-  httpStatus: number,
-) {
+function createErrorResponse(message: string, code: string, httpStatus: number) {
   return Response.json(
     {
       error: {
