@@ -94,4 +94,5 @@ export const lufga = localFont({
     },
   ],
   variable: "--font-lufga",
+  display: "swap",
 });

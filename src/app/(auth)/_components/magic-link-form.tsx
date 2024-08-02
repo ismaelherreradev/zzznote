@@ -5,7 +5,7 @@ import { type TMagicLinkSchema, ZMagicLinkSchema } from "~/lib/auth/validators";
 
 import { Button } from "~/components/ui/button";
 import { Input } from "~/components/ui/input";
-import type { ProduceLoginWithMagicLinkReturnType } from "~/lib/auth/magic-link/action";
+import type { ProduceLoginWithMagicLinkReturnType } from "~/lib/auth/actions";
 
 import { Loader2, SparklesIcon } from "lucide-react";
 

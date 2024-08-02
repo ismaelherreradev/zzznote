@@ -6,7 +6,7 @@ import { useServerAction } from "zsa-react";
 import MagicLinkForm from "./magic-link-form";
 
 import { Separator } from "~/components/ui/separator";
-import { produceLoginWithMagicLink } from "~/lib/auth/magic-link/action";
+import { produceLoginWithMagicLink } from "~/lib/auth/actions";
 import GoogleButton from "./google-button";
 
 export default function AuthContainer() {
