@@ -7,7 +7,7 @@
     "indentStyle": "space",
     "indentWidth": 2,
     "lineEnding": "lf",
-    "lineWidth": 80,
+    "lineWidth": 120,
     "attributePosition": "auto"
   },
   "linter": {
@@ -56,15 +56,6 @@
     }
   },
   "files": {
-    "ignore": [
-      "**/node_modules",
-      "**/dist",
-      "CHANGELOG.md",
-      "pnpm-lock.yaml",
-      ".next",
-      "bun.lockb",
-      "out",
-      "drizzle"
-    ]
+    "ignore": ["**/node_modules", "**/dist", "CHANGELOG.md", "pnpm-lock.yaml", ".next", "bun.lockb", "out", "drizzle"]
   }
 }

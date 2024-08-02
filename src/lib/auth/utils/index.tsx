@@ -2,7 +2,7 @@ import { eq } from "drizzle-orm";
 import { generateIdFromEntropySize } from "lucia";
 import { TimeSpan, createDate } from "oslo";
 import { db } from "~/server/db";
-import { magicLinks, oauth_account, users } from "~/server/db/schema";
+import { magicLinks, users } from "~/server/db/schema";
 
 export async function generateAndInsertMagicLinkToken(userId: string) {
   const token = generateIdFromEntropySize(16);
@@ -32,22 +32,13 @@ export async function deleteMagicToken(token: string) {
   await db.delete(magicLinks).where(eq(magicLinks.token, token));
 }
 
-export async function createMagicLinkAccount(email: string) {
-  return await db.transaction(async (tx) => {
-    const [user] = await tx
-      .insert(users)
-      .values({
-        email,
-      })
-      .returning();
+export async function createMagicLinkUser(email: string) {
+  const [user] = await db
+    .insert(users)
+    .values({
+      email,
+    })
+    .returning();
 
-    await tx.insert(oauth_account).values({
-      userId: user?.id as string,
-      type: "email",
-      providerId: "email",
-      providerUserId: "",
-    });
-
-    return user;
-  });
+  return user;
 }

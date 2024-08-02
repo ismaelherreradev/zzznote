@@ -1,0 +1,1 @@
+CREATE INDEX `account_user_id_idx` ON `zzznote_oauth_account` (`user_id`);

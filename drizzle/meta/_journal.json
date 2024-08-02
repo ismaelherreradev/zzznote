@@ -71,6 +71,13 @@
       "when": 1722449783394,
       "tag": "0009_condemned_baron_zemo",
       "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "6",
+      "when": 1722555724296,
+      "tag": "0010_massive_black_panther",
+      "breakpoints": true
     }
   ]
 }

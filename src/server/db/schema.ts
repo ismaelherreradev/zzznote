@@ -1,17 +1,11 @@
 import { sql } from "drizzle-orm";
 import { relations } from "drizzle-orm";
-import {
-  int,
-  integer,
-  primaryKey,
-  sqliteTableCreator,
-  text,
-} from "drizzle-orm/sqlite-core";
+import { index, int, integer, primaryKey, sqliteTableCreator, text } from "drizzle-orm/sqlite-core";
 import { generateIdFromEntropySize } from "lucia";
 
 export const createTable = sqliteTableCreator((name) => `zzznote_${name}`);
 
-export const accountTypeEnum = ["email", "google", "github"] as const;
+export const accountTypeEnum = ["google", "github"] as const;
 
 export const users = createTable("user", {
   id: text("id")
@@ -45,6 +39,7 @@ export const oauth_account = createTable(
     compoundKey: primaryKey({
       columns: [oauth_account.providerId, oauth_account.providerUserId],
     }),
+    userIdIdx: index("account_user_id_idx").on(oauth_account.userId),
   }),
 );
 
@@ -71,12 +66,8 @@ export const profiles = createTable("profile", {
   displayName: text("display_name"),
   avatar: text("image_id"),
   bio: text("bio").notNull().default(""),
-  createdAt: int("created_at", { mode: "timestamp" })
-    .default(sql`(unixepoch())`)
-    .notNull(),
-  updatedAt: int("updated_at", { mode: "timestamp" }).$onUpdate(
-    () => new Date(),
-  ),
+  createdAt: int("created_at", { mode: "timestamp" }).default(sql`(unixepoch())`).notNull(),
+  updatedAt: int("updated_at", { mode: "timestamp" }).$onUpdate(() => new Date()),
 });
 
 export const sessions = createTable("session", {

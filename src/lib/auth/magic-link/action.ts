@@ -1,44 +1,31 @@
 "use server";
-import {
-  createMagicLinkAccount,
-  generateAndInsertMagicLinkToken,
-} from "~/lib/auth/utils";
+
+import { createMagicLinkUser, generateAndInsertMagicLinkToken } from "~/lib/auth/utils";
 import { db } from "~/server/db";
-import { type TSignInSchema, ZSignInSchema } from "./schema";
 
 import { sendMagicLink } from "~/lib/email";
 
-export interface ActionResponse<T> {
-  fieldError?: Partial<Record<keyof T, string | undefined>>;
-  formError?: string;
-}
+import { createServerAction, type inferServerActionReturnType, type inferServerActionReturnTypeHot } from "zsa";
+import { ZMagicLinkSchema } from "~/lib/auth/validators";
 
-export async function loginWithMagicLink(
-  previousState: null | ActionResponse<TSignInSchema>,
-  formData: FormData,
-): Promise<ActionResponse<TSignInSchema>> {
-  const { success, error, data } = ZSignInSchema.safeParse(
-    Object.fromEntries(formData.entries()),
-  );
+export const produceLoginWithMagicLink = createServerAction()
+  .input(ZMagicLinkSchema)
+  .handler(async ({ input }) => {
+    let user = await db.query.users.findFirst({
+      where: (users, { eq }) => eq(users.email, input.email),
+    });
 
-  if (!success) {
-    return {
-      fieldError: { email: error.flatten().fieldErrors.email?.[0] },
-    };
-  }
+    if (!user) {
+      user = await createMagicLinkUser(input.email);
+    }
 
-  let user = await db.query.users.findFirst({
-    where: (users, { eq }) => eq(users.email, data.email),
+    await sendMagicLinkEmail(user?.id as string, user?.email as string);
+
+    return { email: input.email, emailSend: true };
   });
 
-  if (!user) {
-    user = await createMagicLinkAccount(data.email);
-  }
-
-  await sendMagicLinkEmail(user?.id as string, user?.email as string);
-
-  return {};
-}
+export type ProduceLoginWithMagicLinkReturnType = inferServerActionReturnType<typeof produceLoginWithMagicLink>;
+export type ProduceLoginWithMagicLinkTypeHot = inferServerActionReturnTypeHot<typeof produceLoginWithMagicLink>;
 
 async function sendMagicLinkEmail(userId: string, email: string) {
   const result = await generateAndInsertMagicLinkToken(userId);
