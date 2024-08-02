@@ -1,6 +1,6 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "~/components/ui/form";
+import { Form, FormControl, FormField, FormItem, FormLabel } from "~/components/ui/form";
 import { type TMagicLinkSchema, ZMagicLinkSchema } from "~/lib/auth/validators";
 
 import { Button } from "~/components/ui/button";
@@ -54,13 +54,13 @@ export default function MagicLinkForm({ execute, isPending }: MagicLinkFormProps
               </FormItem>
             )}
           />
-          <Button variant="notik" size="full" type="submit">
+          <Button disabled={!isValid} variant="notik" size="full" type="submit">
             {isPending ? <Loader2 className="animate-spin" /> : "Continue"}
           </Button>
         </form>
       </Form>
       <div>
-        <p className="flex gap-1 text-sm">
+        <p className="flex gap-1 text-notikCream-foreground text-sm">
           <SparklesIcon size={"16"} />
           We'll email you a link for a password-free sign up.
         </p>

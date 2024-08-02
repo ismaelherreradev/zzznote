@@ -2,12 +2,7 @@ import type { Config } from "tailwindcss";
 
 const config = {
   darkMode: ["class"],
-  content: [
-    "./pages/**/*.{ts,tsx}",
-    "./components/**/*.{ts,tsx}",
-    "./app/**/*.{ts,tsx}",
-    "./src/**/*.{ts,tsx}",
-  ],
+  content: ["./pages/**/*.{ts,tsx}", "./components/**/*.{ts,tsx}", "./app/**/*.{ts,tsx}", "./src/**/*.{ts,tsx}"],
   prefix: "",
   theme: {
     container: {
@@ -18,21 +13,32 @@ const config = {
       },
     },
     extend: {
+      fontFamily: {
+        sans: ["var(--font-lufga)"],
+      },
       colors: {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
-        notik: {
-          black: "#000000",
-          goldenYellow: "#F7D44C",
-          burntOrange: "#EB7A53",
-          lightSkyBlue: "#98B7DB",
-          paleGreen: "#A8D672",
-          cream: "#F6ECC9",
-          white: "#FFFFFF",
-        },
+
+        notikBlack: "hsl(var(--notik-black))",
+        notikGoldenYellow: "hsl(var(--notik-golden-yellow))",
+        notikBurntOrange: "hsl(var(--notik-burnt-orange))",
+        notikLightSkyBlue: "hsl(var(--notik-light-sky-blue))",
+        notikPaleGreen: "hsl(var(--notik-pale-green))",
+        notikCream: "hsl(var(--notik-cream))",
+        notikWhite: "hsl(var(--notik-white))",
+
+        "notikBlack-foreground": "hsl(var(--notik-black-foreground))",
+        "notikGoldenYellow-foreground": "hsl(var(--notik-golden-yellow-foreground))",
+        "notikBurntOrange-foreground": "hsl(var(--notik-burnt-orange-foreground))",
+        "notikLightSkyBlue-foreground": "hsl(var(--notik-light-sky-blue-foreground))",
+        "notikPaleGreen-foreground": "hsl(var(--notik-pale-green-foreground))",
+        "notikCream-foreground": "hsl(var(--notik-cream-foreground))",
+        "notikWhite-foreground": "hsl(var(--notik-white-foreground))",
+
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",

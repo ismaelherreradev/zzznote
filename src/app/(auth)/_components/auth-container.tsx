@@ -11,27 +11,28 @@ import GoogleButton from "./google-button";
 
 export default function AuthContainer() {
   const { isPending, execute, data, error } = useServerAction(produceLoginWithMagicLink);
+  const emailSent = data?.emailSend;
 
   return (
-    <Card className="m-4 max-w-sm rounded-2xl bg-notik-cream py-4 text-center">
-      {!data?.emailSend ? (
+    <Card className="m-4 max-w-sm rounded-2xl bg-notikCream py-4 text-center">
+      {emailSent ? (
+        <CheckEmail email={data.email as string} />
+      ) : (
         <>
           <CardHeader className="pb-0">
-            <h1 className="font-extrabold text-2xl">Welcome to Notik</h1>
-            <CardDescription className="font-medium text-foreground">
+            <h1 className="mb-2 font-extrabold text-2xl">Welcome to Notik</h1>
+            <CardDescription className="font-medium text-notikBlack">
               Log In or Register with your email.
             </CardDescription>
-            <div className="pt-6">
+            <div className="flex justify-center pt-6">
               <GoogleButton />
             </div>
           </CardHeader>
-          <Separator className="mx-auto my-6 flex w-3/4 bg-black/20" />
+          <Separator className="mx-auto my-6 w-3/4 bg-black/20" />
           <CardContent>
             <MagicLinkForm execute={execute} isPending={isPending} />
           </CardContent>
         </>
-      ) : (
-        <CheckEmail email={data?.email as string} />
       )}
     </Card>
   );
@@ -49,7 +50,7 @@ export function CheckEmail({ email }: { email: string }) {
           <h3 className="font-semibold text-lg">{email}</h3>
         </div>
 
-        <p className="text-muted-foreground">
+        <p className="text-notikCream-foreground">
           If you haven't received it within a few minutes, double check your spam/junk folder.
         </p>
       </CardContent>

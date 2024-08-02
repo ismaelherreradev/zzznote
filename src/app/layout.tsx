@@ -3,9 +3,9 @@ import "~/styles/globals.css";
 import { GeistSans } from "geist/font/sans";
 import type { Metadata, Viewport } from "next";
 
-import { ThemeProvider } from "~/components/theme-provider";
-
 import { TRPCReactProvider } from "~/trpc/react";
+
+import { lufga } from "~/fonts";
 
 export const metadata: Metadata = {
   title: "Create T3 App",
@@ -14,30 +14,14 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "white" },
-    { media: "(prefers-color-scheme: dark)", color: "black" },
-  ],
+  themeColor: [{ media: "(prefers-color-scheme: dark)", color: "black" }],
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{ children: React.ReactNode }>) {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html
-      lang="en"
-      suppressHydrationWarning
-      className={`${GeistSans.variable}`}
-    >
+    <html lang="en" suppressHydrationWarning className={`${lufga.variable}`}>
       <body className="min-h-screen bg-background font-sans antialiased">
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="light"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <TRPCReactProvider>{children}</TRPCReactProvider>
-        </ThemeProvider>
+        <TRPCReactProvider>{children}</TRPCReactProvider>
       </body>
     </html>
   );
