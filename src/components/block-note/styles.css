@@ -1,0 +1,12 @@
+.bn-container[data-theming-css] .bn-editor * {
+    font-family: "lufga";
+}
+
+.bn-shadcn.dark {
+    --background: transparent;
+    --foreground: black;
+}
+
+.bn-container[data-theming-css][data-color-scheme] {
+    --bn-font-family: "lufga";
+}
