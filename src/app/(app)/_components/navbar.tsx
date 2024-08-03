@@ -6,7 +6,7 @@ import logo from "~/images/NOTIK2.svg";
 
 import { logout } from "~/lib/auth/session";
 
-export default function UserNavbar() {
+export default function Navbar() {
   return (
     <nav className="container flex justify-between py-4">
       <Image

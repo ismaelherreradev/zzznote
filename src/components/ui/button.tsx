@@ -15,7 +15,10 @@ const buttonVariants = cva(
         secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
-        notik: "bg-notikGoldenYellow font-bold text-black hover:bg-notikgoldenYellow/80",
+        notik: "bg-notik-golden-yellow font-bold text-black hover:bg-notik-golden-yellow/80",
+        notikSecundary:
+          "bg-notik-foreground font-bold text-white hover:bg-notik-golden-yellow hover:text-notik-golden-yellow-foreground",
+        notikSecundaryOutline: "bg-notik-foreground hover:bg-[#2A230A]/80",
       },
       size: {
         default: "h-10 px-4 py-2",

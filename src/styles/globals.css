@@ -38,6 +38,8 @@
         --notik-cream: 48, 78%, 88%;
         --notik-white: 0, 0%, 100;
 
+        --notik-foreground: 47, 62%, 10%;
+
         --notik-burnt-orange-foreground: 182, 100%, 23%;
         --notik-light-sky-blue-foreground: 210, 100%, 20%;
         --notik-pale-green-foreground: 270, 100%, 25%;
@@ -80,6 +82,8 @@
         --notik-pale-green: 82, 52%, 35%;
         --notik-cream: 48, 78%, 88%;
         --notik-white: 0, 0%, 0%;
+
+        --notik-foreground: 47, 62%, 10%;
 
         --notik-burnt-orange-foreground: 182, 100%, 77%;
         --notik-light-sky-blue-foreground: 210, 100%, 80%;

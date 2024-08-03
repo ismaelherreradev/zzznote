@@ -1,10 +1,13 @@
-import UserNavbar from "./_components/user-navbar";
+import { Provider } from "jotai";
+import Navbar from "./_components/navbar";
 
 export default async function BoardLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <main className="isolate h-screen bg-black">
-      <UserNavbar />
-      {children}
-    </main>
+    <Provider>
+      <main className="isolate min-h-svh bg-black">
+        <Navbar />
+        {children}
+      </main>
+    </Provider>
   );
 }

@@ -60,7 +60,7 @@ export default function MagicLinkForm({ execute, isPending }: MagicLinkFormProps
         </form>
       </Form>
       <div>
-        <p className="flex gap-1 text-notikCream-foreground text-sm">
+        <p className="flex gap-1 text-notik-cream-foreground text-sm">
           <SparklesIcon size={"16"} />
           We'll email you a link for a password-free sign up.
         </p>

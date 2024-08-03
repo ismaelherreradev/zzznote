@@ -14,7 +14,7 @@ export default function AuthContainer() {
   const emailSent = data?.emailSend;
 
   return (
-    <Card className="m-4 max-w-sm rounded-2xl bg-notikCream py-4 text-center">
+    <Card className="m-4 max-w-sm rounded-2xl bg-notik-cream py-4 text-center">
       {emailSent ? (
         <CheckEmail email={data.email as string} />
       ) : (
@@ -50,7 +50,7 @@ export function CheckEmail({ email }: { email: string }) {
           <h3 className="font-semibold text-lg">{email}</h3>
         </div>
 
-        <p className="text-notikCream-foreground">
+        <p className="text-notik-cream-foreground">
           If you haven't received it within a few minutes, double check your spam/junk folder.
         </p>
       </CardContent>

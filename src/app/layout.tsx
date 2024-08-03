@@ -23,7 +23,7 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" suppressHydrationWarning className={`${lufga.variable}`}>
-      <body className="min-h-screen bg-background font-sans antialiased">
+      <body className="min-h-svh bg-notik-black font-sans antialiased">
         <TRPCReactProvider>{children}</TRPCReactProvider>
       </body>
     </html>
